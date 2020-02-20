@@ -1,14 +1,103 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
+@import "../variables";
 
 header {
-  background: #eee;
+  background: @bg-gray-color;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  border-bottom: 1px solid @border-gray-color;
+  // box-shadow:@shadow;
+
+  #brand {
+    font-family: @brand-font;
+    color:@font-main-color;
+    margin: 0;
+    padding: 0;
+    line-height: 60px;
+  }
+
+  nav {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      &.nav-menu {
+        display: inline-flex;
+
+        a {
+          cursor: pointer;
+          color: @font-main-color;
+
+          transition: all ease 0.3s;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+
+        .nav-item {
+          display: block;
+          line-height: 60px;
+          padding: 0 30px;
+        }
+
+        .nav-li {
+          display: block;
+          position: relative;
+
+          ul {
+            background: #fff;
+            border: 1px solid @border-gray-color;
+            border-top: none;
+            border-bottom-right-radius: @border-radius;
+            box-shadow: @shadow;
+            padding: 5px 0;
+            position: absolute;
+            left: 0;
+            //   top:36px;
+            z-index: 999;
+            visibility: hidden;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            -webkit-transition: 300ms ease;
+            -moz-transition: 300ms ease;
+            -o-transition: 300ms ease;
+            transition: 300ms ease;
+
+            li {
+              a {
+                display: block;
+                padding: 5px 30px;
+                &:hover {
+                  color: @primary-color;
+                }
+              }
+            }
+          }
+
+          &:hover {
+            .nav-item {
+              background: @hover-bg-color-rgba;
+            }
+
+            ul {
+              visibility: visible;
+              opacity: 1;
+              filter: alpha(opacity=100);
+            }
+          }
+        }
+      }
+    }
+  }
+
+
 }
 
 main {
-  padding: 25px 0;
+  padding: 60px 0 30px 0;
 }
 
 footer {
