@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import Navbar from "./HeaderComponents/Navbar";
+import Basket from "./HeaderComponents/Basket";
 
 const Header = () => {
     return (
@@ -16,7 +17,7 @@ const Header = () => {
                         <Navbar/>
                     </Col>
                     <Col lg={2} xl={1}>
-                        basket
+                        <Basket/>
                     </Col>
                 </Row>
             </Container>
