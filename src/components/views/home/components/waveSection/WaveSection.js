@@ -1,12 +1,12 @@
 import React from 'react';
 import {SVG} from "../../../../shared/svg/SVG";
-import {pathBottom, pathDimensions, pathTOP} from "../../../../../utilities/svgPaths";
+import {pathBottom, pathDimensions, pathHeight, pathTOP} from "../../../../../utilities/svgPaths";
 import {Col, Container, Row} from "react-bootstrap";
 
 const WaveSection = () => {
     return (
         <section id={'WAVE'}>
-            <SVG fill={'#DDD'} viewbox={pathDimensions()} path={pathTOP()}/>
+            <SVG fill={'#FFF'} viewbox={pathDimensions()} path={pathTOP()} />
             <Container>
                 <Row>
                     <Col lg={6} xl={6}>
@@ -29,7 +29,7 @@ const WaveSection = () => {
                     </Col>
                 </Row>
             </Container>
-            <SVG fill={'#DDD'} viewbox={pathDimensions()} path={pathBottom()}/>
+            <SVG fill={'#FFF'} viewbox={pathDimensions()} path={pathBottom()}/>
 
         </section>
     );

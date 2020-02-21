@@ -131,11 +131,15 @@ main {
 footer {
   border-top: 1px solid #ddd;
 }
+#HOMEVIEW section#LAST h1 {
+  text-align: center;
+  margin: 50px 0 25px;
+}
 #HOMEVIEW section#WAVE {
-  background: #ae1290;
+  background: linear-gradient(left, #ae1290, #60064a);
 }
 #HOMEVIEW section#WAVE .container {
-  padding: 25px 0;
+  padding: 15px 0;
 }
 #HOMEVIEW section#WAVE .container .wave-column h1,
 #HOMEVIEW section#WAVE .container .wave-column h2 {
@@ -143,6 +147,6 @@ footer {
   text-align: center;
 }
 #HOMEVIEW section#WAVE .container .wave-column.last {
-  margin-top: 45px;
+  margin-top: 65px;
 }
 /*# sourceMappingURL=imports.css.map */

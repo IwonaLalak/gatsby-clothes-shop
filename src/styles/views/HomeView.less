@@ -1,11 +1,17 @@
 @import "../variables";
 
 #HOMEVIEW {
+  section#LAST{
+    h1{
+      text-align: center;
+      margin: 50px 0 25px;
+    }
+  }
   section#WAVE {
-    background: @primary-color;
+    background: linear-gradient(left,@primary-color, @primary-color-darkest);
     .container{
 
-      padding:25px 0;
+      padding:15px 0;
 
       .wave-column{
 
@@ -19,7 +25,7 @@
         }
 
         &.last{
-          margin-top: 45px;
+          margin-top: 65px;
         }
       }
     }
