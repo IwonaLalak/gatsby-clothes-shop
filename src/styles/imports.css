@@ -134,4 +134,15 @@ footer {
 #HOMEVIEW section#WAVE {
   background: #ae1290;
 }
+#HOMEVIEW section#WAVE .container {
+  padding: 25px 0;
+}
+#HOMEVIEW section#WAVE .container .wave-column h1,
+#HOMEVIEW section#WAVE .container .wave-column h2 {
+  color: #fff;
+  text-align: center;
+}
+#HOMEVIEW section#WAVE .container .wave-column.last {
+  margin-top: 45px;
+}
 /*# sourceMappingURL=imports.css.map */
