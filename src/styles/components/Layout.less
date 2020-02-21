@@ -1,5 +1,11 @@
 @import "../variables";
 
+#LAYOUT {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 header {
   background: @bg-gray-color;
   height: 60px;
@@ -91,13 +97,14 @@ header {
 
   #basket-header {
     line-height: 60px;
-    display:inline-flex;
+    display: inline-flex;
     align-items: center;
     justify-content: right;
 
-    span:first-of-type{
+    span:first-of-type {
       margin: 0 5px;
     }
+
     .badge {
       display: inline-block;
     }
@@ -106,9 +113,55 @@ header {
 }
 
 main {
+  flex: 1;
   padding: 60px 0 30px 0;
 }
 
 footer {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid @border-gray-color;
+  padding: 15px 0 5px 0;
+  text-align: center;
+
+  #footer-up {
+    h6 {
+      font-size: 18px;
+    }
+
+    a {
+      font-size: 14px;
+      display: block;
+      margin-top: 5px;
+      cursor: pointer;
+
+      &:hover {
+        color: @primary-color
+      }
+    }
+
+    #social-icons-container {
+    }
+  }
+
+  #footer-bottom {
+    margin-top: 5px;
+
+    h1 {
+      font-family: @brand-font;
+      font-size: 36px;
+      margin-bottom: 0;
+    }
+
+    #copyright {
+      color: @font-gray-color;
+      font-size: 12px;
+
+      a {
+        color: #777;
+
+        &:hover {
+          color: @primary-color
+        }
+      }
+    }
+  }
 }

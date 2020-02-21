@@ -16,11 +16,11 @@ import '../../../styles/imports.css'
 const Layout = ({children}) => {
 
     return (
-        <>
+        <div id={'LAYOUT'}>
             <Header/>
             <main>{children}</main>
             <Footer/>
-        </>
+        </div>
     )
 }
 
