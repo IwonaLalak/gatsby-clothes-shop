@@ -1,9 +1,12 @@
 import React from 'react';
+import LastSection from "./components/lastSection/LastSection";
+import WaveSection from "./components/waveSection/WaveSection";
 
 const HomeView = () => {
     return (
-        <div>
-            Home view
+        <div id={'HOMEVIEW'}>
+            <LastSection/>
+            <WaveSection/>
         </div>
     );
 };
