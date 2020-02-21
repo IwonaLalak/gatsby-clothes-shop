@@ -1,5 +1,6 @@
 import React from 'react';
 import {Container, Row, Col} from "react-bootstrap";
+import ProductComponent from "../../../../product/ProductComponent";
 
 const LastSection = () => {
     return (
@@ -12,16 +13,16 @@ const LastSection = () => {
                 </Row>
                 <Row>
                     <Col xs={12} sm={12} md={6} lg={6} xl={3}>
-                        produkt
+                        <ProductComponent/>
                     </Col>
                     <Col xs={12} sm={12} md={6} lg={6} xl={3}>
-                        produkt
+                        <ProductComponent/>
                     </Col>
                     <Col xs={12} sm={12} md={6} lg={6} xl={3}>
-                        produkt
+                        <ProductComponent/>
                     </Col>
                     <Col xs={12} sm={12} md={6} lg={6} xl={3}>
-                        produkt
+                        <ProductComponent/>
                     </Col>
                 </Row>
             </Container>

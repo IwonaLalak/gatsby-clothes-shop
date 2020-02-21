@@ -171,6 +171,10 @@ footer #footer-bottom #copyright a {
 footer #footer-bottom #copyright a:hover {
   color: #ae1290;
 }
+.ProductComponent {
+  border: 1px solid #e5e5e5;
+  padding: 15px;
+}
 #HOMEVIEW section#LAST h1 {
   text-align: center;
   margin: 50px 0 25px;
