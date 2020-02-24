@@ -1,13 +1,12 @@
 import React from 'react';
 import Layout from "../components/shared/layout/layout";
 import SEO from "../components/shared/seo/seo";
-import ProductView from "../components/views/product/ProductView";
 
-const Product = ({pageContext}) => {
+const Category = ({pageContext}) => {
     return (
         <Layout>
-            <SEO title={'product page'} />
-            <ProductView/>
+            <SEO title={'category page'} />
+            category
             <div>
                 {
                     JSON.stringify(pageContext, undefined, 2)
@@ -17,4 +16,4 @@ const Product = ({pageContext}) => {
     );
 };
 
-export default Product;
+export default Category;
