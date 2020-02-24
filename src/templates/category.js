@@ -6,7 +6,9 @@ const Category = ({pageContext}) => {
     return (
         <Layout>
             <SEO title={'category page'} />
-            category
+            <h1>
+                Category: {pageContext.category_name}
+            </h1>
             <div>
                 {
                     JSON.stringify(pageContext, undefined, 2)

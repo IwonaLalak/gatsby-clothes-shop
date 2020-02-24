@@ -7,7 +7,8 @@ const Product = ({pageContext}) => {
     return (
         <Layout>
             <SEO title={'product page'} />
-            <ProductView/>
+            <h1>Category: {pageContext.category.category_name} / {pageContext.subcategory.subcategory_name}</h1>
+            <ProductView product={pageContext.product}/>
             <div>
                 {
                     JSON.stringify(pageContext, undefined, 2)
