@@ -65,29 +65,33 @@ header #brand {
   padding: 0;
   line-height: 60px;
 }
-header nav ul {
+header #nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+header #nav-container nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-header nav ul.nav-menu {
+header #nav-container nav ul.nav-menu {
   display: inline-flex;
 }
-header nav ul.nav-menu a {
+header #nav-container nav ul.nav-menu a {
   cursor: pointer;
   color: #111;
   transition: all ease 0.3s;
 }
-header nav ul.nav-menu .nav-item {
+header #nav-container nav ul.nav-menu .nav-item {
   display: block;
   line-height: 60px;
   padding: 0 30px;
 }
-header nav ul.nav-menu .nav-li {
+header #nav-container nav ul.nav-menu .nav-li {
   display: block;
   position: relative;
 }
-header nav ul.nav-menu .nav-li ul {
+header #nav-container nav ul.nav-menu .nav-li ul {
   background: #fff;
   border: 1px solid #e5e5e5;
   border-top: none;
@@ -105,18 +109,18 @@ header nav ul.nav-menu .nav-li ul {
   -o-transition: 300ms ease;
   transition: 300ms ease;
 }
-header nav ul.nav-menu .nav-li ul li a {
+header #nav-container nav ul.nav-menu .nav-li ul li a {
   display: block;
   padding: 5px 30px;
   min-width: 200px;
 }
-header nav ul.nav-menu .nav-li ul li a:hover {
+header #nav-container nav ul.nav-menu .nav-li ul li a:hover {
   color: #ae1290;
 }
-header nav ul.nav-menu .nav-li:hover .nav-item {
+header #nav-container nav ul.nav-menu .nav-li:hover .nav-item {
   background: rgba(132, 14, 106, 0.2);
 }
-header nav ul.nav-menu .nav-li:hover ul {
+header #nav-container nav ul.nav-menu .nav-li:hover ul {
   visibility: visible;
   opacity: 1;
   filter: alpha(opacity=100);

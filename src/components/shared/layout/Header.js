@@ -14,7 +14,9 @@ const Header = () => {
                         </h1>
                     </Col>
                     <Col lg={7} xl={9}>
-                        <Navbar/>
+                        <div id={'nav-container'}>
+                            <Navbar/>
+                        </div>
                     </Col>
                     <Col lg={2} xl={1}>
                         <Basket/>

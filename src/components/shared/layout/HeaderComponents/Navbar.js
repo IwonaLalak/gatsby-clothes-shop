@@ -1,5 +1,6 @@
 import React from 'react';
 import {graphql, StaticQuery, Link} from "gatsby";
+import Search from "./Search";
 
 const Navbar = () => {
 
@@ -56,11 +57,14 @@ const Navbar = () => {
               `
         }
                      render={data => (
-                         <nav>
-                             {
-                                 renderLinks(data.allCategories.edges)
-                             }
-                         </nav>
+                         <>
+                             <nav>
+                                 {
+                                     renderLinks(data.allCategories.edges)
+                                 }
+                             </nav>
+                             <Search/>
+                         </>
                      )}/>
 
     );
