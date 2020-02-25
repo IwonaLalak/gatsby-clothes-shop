@@ -6,7 +6,7 @@ import {graphql, Link} from "gatsby";
 const Subcategory = (props) => {
 
     let {pageContext} = props;
-    let {data: {allProduct}} = props;
+    let {data: {allProducts}} = props;
 
     return (
         <Layout>
@@ -15,13 +15,13 @@ const Subcategory = (props) => {
             <h5>products in subcategory:</h5>
             <ul>
                 {
-                    allProduct.edges.map(({node}) =>
+                    allProducts.edges.map(({node}) =>
 
                         <li>
                             <Link to={
-                                node.productCategory.category_url
+                                node.category_url
                                 +
-                                node.productSubcategory.subcategory_url
+                                node.subcategory_url
                                 +
                                 node.product_url
                             }>
@@ -42,23 +42,19 @@ const Subcategory = (props) => {
 
 export const query = graphql`
     query getProductsInSubcategory($subcategory_id: Int!) {
-      allProduct(filter: {subcategory_id: {eq: $subcategory_id}}) {
+      allProducts(filter: {subcategory_id: {eq: $subcategory_id}}) {
         edges {
           node {
             id
             product_name
             product_url
             subcategory_id
-            productCategory {
               category_id
               category_name
               category_url
-            }
-            productSubcategory {
               subcategory_id
               subcategory_name
               subcategory_url
-            }
           }
         }
       }

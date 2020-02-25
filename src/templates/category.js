@@ -5,11 +5,11 @@ import {graphql, Link} from 'gatsby';
 
 const Category = (props) => {
     let {pageContext} = props;
-    let {data: {allProduct}} = props;
+    let {data: {allProducts}} = props;
 
     const checkIfThereAreSomeProducts = (subcategory_id) => {
 
-        let products = allProduct.edges.filter(item => subcategory_id === item.node.subcategory_id);
+        let products = allProducts.edges.filter(item => subcategory_id === item.node.subcategory_id);
         if (products.length > 0)
             return products.length
         else
@@ -24,7 +24,7 @@ const Category = (props) => {
 
             </h1>
             <h3>
-                {allProduct.edges.length} products
+                {allProducts.edges.length} products
             </h3>
             <h5>subcategories:</h5>
             <ul>
@@ -51,7 +51,7 @@ const Category = (props) => {
 
 export const query = graphql`
     query getProductsInCategory($category_id: Int!) {
-      allProduct(filter: {category_id: {eq: $category_id}}) {
+      allProducts(filter: {category_id: {eq: $category_id}}) {
         edges {
           node {
             id

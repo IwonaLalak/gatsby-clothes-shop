@@ -38,7 +38,7 @@ const Navbar = () => {
         <StaticQuery query={
             graphql`
               query NavbarQuery {
-                 allCategory {
+                 allCategories {
                     edges {
                       node {
                         category_name
@@ -58,7 +58,7 @@ const Navbar = () => {
                      render={data => (
                          <nav>
                              {
-                                 renderLinks(data.allCategory.edges)
+                                 renderLinks(data.allCategories.edges)
                              }
                          </nav>
                      )}/>

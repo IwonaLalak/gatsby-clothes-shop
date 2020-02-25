@@ -4,6 +4,7 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
+const _ = require('lodash');
 const axios = require('axios');
 const {api} = require('./hidden');
 
@@ -23,12 +24,6 @@ exports.createPages = async ({actions: {createPage}}) => {
 
     const productsData = await getProducts();
     const products = productsData.data;
-
-    createPage({
-        path: '/all',
-        component: require.resolve('./src/templates/categories.js'),
-        context: {arr: categories}
-    });
 
     categories.forEach(category => {
         createPage({
@@ -57,18 +52,15 @@ exports.createPages = async ({actions: {createPage}}) => {
             subcategory = category.subcategories.find(s => s.subcategory_id === product.subcategory_id);
         }
 
-        //  let subcategories = category.subcategories;
-        // subcategories.forEach(subcategory => {
         createPage({
             path: `${category.category_url}${subcategory.subcategory_url}${product.product_url}`,
             component: require.resolve('./src/templates/product.js'),
             context: {
-                category,
+                category: _.omit(category,"subcategories"),
                 subcategory,
                 product
             }
         });
-        // });
     });
 };
 
@@ -81,7 +73,7 @@ exports.sourceNodes = async ({actions, createNodeId, createContentDigest}) => {
             id: createNodeId(`Category-${category.category_id}`),
             ...category,
             internal: {
-                type: "Category",
+                type: "Categories",
                 contentDigest: createContentDigest(category),
             },
         };
@@ -103,10 +95,10 @@ exports.sourceNodes = async ({actions, createNodeId, createContentDigest}) => {
         const node = {
             id: createNodeId(`Product-${product.product_id}`),
             ...product,
-            productCategory: category,
-            productSubcategory: subcategory,
+            ...(_.omit(category,"subcategories")),
+            ...subcategory,
             internal: {
-                type: "Product",
+                type: "Products",
                 contentDigest: createContentDigest(product),
             },
         };
