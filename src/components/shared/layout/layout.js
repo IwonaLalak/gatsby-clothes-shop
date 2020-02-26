@@ -11,16 +11,20 @@ import Header from "./Header";
 import Footer from "./Footer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../styles/imports.css'
+import {Provider} from 'react-redux';
+import store from './../../../redux_storage/store';
 
 
 const Layout = ({children}) => {
 
     return (
-        <div id={'LAYOUT'}>
-            <Header/>
-            <main>{children}</main>
-            <Footer/>
-        </div>
+        <Provider store={store}>
+            <div id={'LAYOUT'}>
+                <Header/>
+                <main>{children}</main>
+                <Footer/>
+            </div>
+        </Provider>
     )
 }
 
