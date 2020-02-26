@@ -1,5 +1,6 @@
 import React from 'react';
 import {IconSearch} from "../../icons/FontAwesomeIcons";
+import {navigate} from 'gatsby';
 
 const Search = () => {
 
@@ -7,8 +8,8 @@ const Search = () => {
 
     const onSubmitSearch = (e) => {
         e.preventDefault();
-        if(searchInput.current.value.length>0 && searchInput.current.value.length < 100){
-            console.log('searching '+searchInput.current.value)
+        if (searchInput.current.value.length > 0 && searchInput.current.value.length < 100) {
+            navigate("/search", {state: {searchedValue:searchInput.current.value}});
         }
     };
 
