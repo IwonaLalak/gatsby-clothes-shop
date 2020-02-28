@@ -10,7 +10,7 @@ const SearchPage = (props) => {
             <SEO title="Search"/>
             <h1>szukam: {props.location.state && props.location.state.searchedValue}</h1>
 
-            <SearchView />
+            <SearchView searched={props.location.state && props.location.state.searchedValue} />
         </Layout>
     );
 };
