@@ -28,7 +28,7 @@ class GenerateProductView extends Component {
     };
 
 
-    onChangeValue(value, key) {
+    onChangeValue(key, value) {
         if (value !== null && value !== undefined) {
             let obj = Object.assign({}, this.state.currentProduct);
             obj[key] = value;
@@ -36,7 +36,21 @@ class GenerateProductView extends Component {
         }
     }
 
+    renderInput = (key) => {
+
+        return (
+            <div>
+                <label htmlFor={'input' + key}>{key}</label>
+                <input id={'input' + key} type={key === "product_price" ? "number" : "text"}
+                       onChange={(e) => this.onChangeValue(key, e.target.value)}/>
+            </div>
+        )
+    }
+
     render() {
+
+        const keys = ["product_name", "product_code", "product_price", "product_url", "product_img", "product_desc", "product_collection"];
+
         return (
             <div>
                 <button onClick={() => console.log(this.state)}>console state</button>
@@ -47,7 +61,7 @@ class GenerateProductView extends Component {
                     <input type={'number'}
                            onChange={(e) => {
                                this.setState({id: e.target.value});
-                               this.onChangeValue(e.target.value, "product_id");
+                               this.onChangeValue("product_id", e.target.value);
                            }}
                            defaultValue={this.state.id}/>
 
@@ -61,7 +75,7 @@ class GenerateProductView extends Component {
                                 value={this.state.category}
                                 onChange={(e) => {
                                     this.setState({category: e, subcategory: null});
-                                    this.onChangeValue(e.category_id, "category_id");
+                                    this.onChangeValue("category_id", e.category_id);
                                 }}
                             />
                         </div>
@@ -76,20 +90,19 @@ class GenerateProductView extends Component {
                                     value={this.state.subcategory}
                                     onChange={(e) => {
                                         this.setState({subcategory: e});
-                                        this.onChangeValue(e.subcategory_id,"subcategory_id");
+                                        this.onChangeValue("subcategory_id", e.subcategory_id);
                                     }}
                                 />
                             </div>
                         }
-                        <div>
-                            <label>product name</label>
-                            <input type={'text'} onChange={(e) => this.onChangeValue(e.target.value, 'product_name')}/>
-                        </div>
+                        {
+                            keys.map(item => this.renderInput(item))
+                        }
                     </form>
                 </div>
                 <div style={{width: "50%", float: 'left'}}>
                     <JsonElement value={this.state.currentProduct} label={'current product'} id={'currentProductJSON'}
-                                 rows={30}/>
+                                 rows={20}/>
                 </div>
 
             </div>
