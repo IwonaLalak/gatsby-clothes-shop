@@ -5,6 +5,21 @@ import {productModel} from "../../../utilities/models/models";
 import JsonElement from "../../shared/forTests/jsonElement";
 import {IconAdd, IconRemove, IconSearch} from "../../shared/icons/FontAwesomeIcons";
 import {generateNextID} from "../../../utilities/helpers/generateNextId";
+import {Button, Col, Form, FormCheck, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
+import Layout from "../../shared/layout/layout";
+
+export const FormatFormgroupRow = ({labelComponent, inputComponent, longerLabel}) => {
+    return (
+        <Row>
+            <Col lg={longerLabel ? 4 : 3} xl={longerLabel ? 4 : 3}>
+                {labelComponent}
+            </Col>
+            <Col lg={longerLabel ? 8 : 9} xl={longerLabel ? 8 : 9}>
+                {inputComponent}
+            </Col>
+        </Row>
+    )
+};
 
 class GenerateProductView extends Component {
     state = {
@@ -25,6 +40,7 @@ class GenerateProductView extends Component {
         this.getCategories();
     }
 
+
     getCategories = () => {
         getCategories().then(({data}) => this.setState({categories: data})).catch(e => console.log(e))
     };
@@ -41,12 +57,14 @@ class GenerateProductView extends Component {
     renderInput = (key) => {
 
         return (
-            <div>
-                <label htmlFor={'input' + key}>{key}</label>
-                <input id={'input' + key} type={key === "product_price" ? "number" : "text"}
-                       onChange={(e) => this.onChangeValue(key, e.target.value)}
-                       value={this.state.currentProduct[key]}/>
-            </div>
+            <FormGroup>
+                <FormatFormgroupRow
+                    labelComponent={<FormLabel htmlFor={'input' + key}>{key}</FormLabel>}
+                    inputComponent={<FormControl id={'input' + key} type={key === "product_price" ? "number" : "text"}
+                                                 onChange={(e) => this.onChangeValue(key, e.target.value)}
+                                                 value={this.state.currentProduct[key]}/>}
+                />
+            </FormGroup>
         )
     }
 
@@ -123,126 +141,242 @@ class GenerateProductView extends Component {
         const keys = ["product_name", "product_code", "product_price", "product_url", "product_img", "product_desc", "product_collection"];
 
         return (
-            <div id={'GENERATE_PRODUCT_VIEW'}>
-                <button onClick={() => console.log(this.state)}>console state</button>
-                <h5>just for tests..</h5>
-
-                <div style={{width: "50%", float: 'left'}}>
-                    <label>change start id</label>
-                    <input type={'number'}
-                           onChange={(e) => {
-                               this.setState({id: e.target.value});
-                               this.onChangeValue("product_id", e.target.value);
-                           }}
-                           defaultValue={this.state.id}
-                           value={this.state.id}
-                    />
-
-                    <form>
-                        <div>
-                            <label>category</label>
-                            <Select
-                                getOptionLabel={({category_name}) => category_name}
-                                getOptionValue={({category_id}) => category_id}
-                                options={this.state.categories}
-                                value={this.state.category}
-                                onChange={(e) => {
-                                    this.setState({category: e, subcategory: null});
-                                    this.onChangeValue("category_id", e.category_id);
-                                }}
-                            />
-                        </div>
-                        {
-                            Boolean(this.state.category) &&
-                            <div>
-                                <label>subcategory</label>
-                                <Select
-                                    getOptionLabel={({subcategory_name}) => subcategory_name}
-                                    getOptionValue={({subcategory_id}) => subcategory_id}
-                                    options={this.state.category.subcategories}
-                                    value={this.state.subcategory}
-                                    onChange={(e) => {
-                                        this.setState({subcategory: e});
-                                        this.onChangeValue("subcategory_id", e.subcategory_id);
-                                    }}
+            <div id={'GENERATE_PRODUCT_VIEW'} style={{padding: '15px'}}>
+                <Row>
+                    <Col xl={12}>
+                        <h1 style={{marginBottom:'25px'}}>
+                            generate product json
+                            <small style={{marginLeft:'15px',color:'grey'}}>
+                                just for tests..
+                            </small>
+                        </h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={6} xl={6}>
+                        <Form>
+                            <FormGroup>
+                                <FormatFormgroupRow
+                                    labelComponent={<FormLabel>change start id</FormLabel>}
+                                    inputComponent={<FormControl type={'number'}
+                                                                 onChange={(e) => {
+                                                                     this.setState({id: e.target.value});
+                                                                     this.onChangeValue("product_id", e.target.value);
+                                                                 }}
+                                                                 defaultValue={this.state.id}
+                                                                 value={this.state.id}
+                                    />}
                                 />
-                            </div>
-                        }
-                        {
-                            keys.map(item => this.renderInput(item))
-                        }
-                        <div>
-                            <label>sizes:</label>
-                            <div>
-                                {
-                                    Boolean(this.state.currentProduct) &&
-                                    this.state.currentProduct.product_sizes.map(size =>
-                                        <span style={{marginRight: '15px'}}>
-                                           <input type={'checkbox'} checked={size.available}
-                                                  onChange={(e) => this.onChangeProductSize(e, size)}/>
-                                           <span>{size.size} [{size.size_number}]</span>
-                                        </span>
-                                    )
-                                }
-                            </div>
-                        </div>
-                        <div>
-                            <label>product variants</label>
-                            <button type={'button'} onClick={() => this.addToDynamicArray('product_variants')}>
-                                <IconAdd/> add new
-                            </button>
+                            </FormGroup>
+                            <FormGroup>
+                                <FormatFormgroupRow
+                                    labelComponent={<FormLabel>category</FormLabel>}
+                                    inputComponent={<Select
+                                        getOptionLabel={({category_name}) => category_name}
+                                        getOptionValue={({category_id}) => category_id}
+                                        options={this.state.categories}
+                                        value={this.state.category}
+                                        onChange={(e) => {
+                                            this.setState({category: e, subcategory: null});
+                                            this.onChangeValue("category_id", e.category_id);
+                                        }}
+                                    />}
+                                />
+                            </FormGroup>
                             {
-                                Boolean(this.state.currentProduct) &&
-                                this.state.currentProduct.product_variants.map(variant =>
-                                    <div key={variant.variant_id}>
-                                        <label>variant name</label><input type={'text'}
-                                                                          onChange={(e) => this.onChangeDynamicArrayValue(variant.variant_id, 'variant_name', e.target.value)}
-                                                                          value={variant.variant_name}
+                                Boolean(this.state.category) &&
+                                <FormGroup>
+                                    <FormatFormgroupRow
+                                        labelComponent={<FormLabel>subcategory</FormLabel>}
+                                        inputComponent={<Select
+                                            getOptionLabel={({subcategory_name}) => subcategory_name}
+                                            getOptionValue={({subcategory_id}) => subcategory_id}
+                                            options={this.state.category.subcategories}
+                                            value={this.state.subcategory}
+                                            onChange={(e) => {
+                                                this.setState({subcategory: e});
+                                                this.onChangeValue("subcategory_id", e.subcategory_id);
+                                            }}
+                                        />}
                                     />
-                                        <label>variant icon</label><input type={'text'}
-                                                                          onChange={(e) => this.onChangeDynamicArrayValue(variant.variant_id, 'variant_icon', e.target.value)}
-                                                                          value={variant.variant_icon}
-                                    />
-                                        <button type={'button'} onClick={() => this.removeFromDynamicArray(variant)}>
-                                            <IconRemove/></button>
-                                    </div>
-                                )
+                                </FormGroup>
                             }
-                        </div>
-                        <div>
-                            <label>product details</label>
-                            <button type={'button'} onClick={() => this.addToDynamicArray('product_details')}>
-                                <IconAdd/> add new
-                            </button>
                             {
-                                Boolean(this.state.currentProduct) &&
-                                this.state.currentProduct.product_details.map(detail =>
-                                    <div key={detail.id}>
-                                        <label>detail key</label><input type={'text'}
-                                                                        onChange={(e) => this.onChangeDynamicArrayValue(detail.id, 'key', e.target.value)}
-                                                                        value={detail.key}/>
-                                        <label>detail value</label><input type={'text'}
-                                                                          onChange={(e) => this.onChangeDynamicArrayValue(detail.id, 'value', e.target.value)}
-                                                                          value={detail.value}
-                                    />
-                                        <button type={'button'} onClick={() => this.removeFromDynamicArray(detail)}>
-                                            <IconRemove/></button>
-                                    </div>
-                                )
+                                keys.map(item => this.renderInput(item))
                             }
-                        </div>
-                    </form>
-                </div>
-                <div style={{width: "50%", float: 'left'}}>
-                    <JsonElement value={this.state.currentProduct} label={'current product'} id={'currentProductJSON'}
-                                 rows={20}/>
-                    <button type={'button'} onClick={this.addToProductArray}>add to products array</button>
-                </div>
-                <div>
-                    <JsonElement value={this.state.productArray} label={'products array'} id={'currentProductArrayJSON'}
-                                 rows={20}/>
-                </div>
+                            <FormGroup>
+                                <FormatFormgroupRow
+                                    labelComponent={<label>sizes:</label>}
+                                    inputComponent={
+                                        <div>
+                                            {
+                                                Boolean(this.state.currentProduct) &&
+                                                this.state.currentProduct.product_sizes.map(size => (
+                                                    <span style={{marginRight: '15px'}}>
+                                                        <FormCheck
+                                                            checked={size.available}
+                                                            inline={true}
+                                                            onChange={(e) => this.onChangeProductSize(e, size)}
+                                                            label={<span>{size.size} [{size.size_number}]</span>}
+                                                        />
+                                                    </span>
+                                                ))
+                                            }
+                                        </div>}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <div style={{
+                                    border: "1px solid #ccc",
+                                    borderRadius: '5px',
+                                    padding: '5px'
+                                }}>
+                                    <FormatFormgroupRow
+                                        labelComponent={
+                                            <div>
+                                                <FormLabel style={{marginRight: 5}}>product variants</FormLabel>
+                                                <Button size={'sm'}
+                                                        variant={'success'}
+                                                        type={'button'}
+                                                        onClick={() => this.addToDynamicArray('product_variants')}>
+                                                    <IconAdd/>
+                                                </Button>
+                                            </div>
+                                        }
+                                        inputComponent={
+                                            <div>
+                                                {
+                                                    Boolean(this.state.currentProduct) &&
+                                                    this.state.currentProduct.product_variants.map((variant, index) =>
+                                                        <div key={variant.variant_id}>
+                                                            <Row>
+                                                                <Col xs={5}>
+                                                                    <FormatFormgroupRow
+                                                                        labelComponent={<FormLabel><span
+                                                                            style={{fontSize: '10px'}}>{index})</span> name</FormLabel>}
+                                                                        inputComponent={<FormControl type={'text'}
+                                                                                                     onChange={(e) => this.onChangeDynamicArrayValue(variant.variant_id, 'variant_name', e.target.value)}
+                                                                                                     value={variant.variant_name}
+                                                                        />}
+                                                                        longerLabel={true}
+                                                                    />
+                                                                </Col>
+                                                                <Col xs={5}>
+                                                                    <FormatFormgroupRow
+                                                                        labelComponent={<FormLabel>icon</FormLabel>}
+                                                                        inputComponent={<FormControl type={'text'}
+                                                                                                     onChange={(e) => this.onChangeDynamicArrayValue(variant.variant_id, 'variant_icon', e.target.value)}
+                                                                                                     value={variant.variant_icon}
+                                                                        />}
+                                                                    />
+                                                                </Col>
+                                                                <Col xs={1}>
+                                                                    <Button type={'button'}
+                                                                            variant={'danger'}
+                                                                            size={'sm'}
+                                                                            onClick={() => this.removeFromDynamicArray(variant)}>
+                                                                        <IconRemove/>
+                                                                    </Button>
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    )
+                                                }
+                                                {
+                                                    Boolean(this.state.currentProduct) &&
+                                                    this.state.currentProduct.product_variants.length === 0 &&
+                                                    <p className={'text-danger'}>no variants</p>
+                                                }
+                                            </div>
+                                        }
+                                    />
+                                </div>
+                            </FormGroup>
+                            <FormGroup>
+                                <div style={{
+                                    border: "1px solid #ccc",
+                                    borderRadius: '5px',
+                                    padding: '5px'
+                                }}>
+                                    <FormatFormgroupRow
+                                        labelComponent={
+                                            <div>
+                                                <FormLabel style={{marginRight: 5}}>product details</FormLabel>
+                                                <Button size={'sm'}
+                                                        variant={'success'}
+                                                        type={'button'}
+                                                        onClick={() => this.addToDynamicArray('product_details')}>
+                                                    <IconAdd/>
+                                                </Button>
+                                            </div>
+                                        }
+                                        inputComponent={
+                                            <div>
+                                                {
+                                                    Boolean(this.state.currentProduct) &&
+                                                    this.state.currentProduct.product_details.map((detail, index) =>
+                                                        <div key={detail.id}>
+                                                            <Row>
+                                                                <Col xs={5}>
+                                                                    <FormatFormgroupRow
+                                                                        labelComponent={<FormLabel><span
+                                                                            style={{fontSize: '10px'}}>{index})</span> key</FormLabel>}
+                                                                        inputComponent={<FormControl type={'text'}
+                                                                                                     onChange={(e) => this.onChangeDynamicArrayValue(detail.id, 'key', e.target.value)}
+                                                                                                     value={detail.key}
+                                                                        />}
+                                                                        longerLabel={true}
+                                                                    />
+                                                                </Col>
+                                                                <Col xs={5}>
+                                                                    <FormatFormgroupRow
+                                                                        labelComponent={<FormLabel>value</FormLabel>}
+                                                                        inputComponent={<FormControl type={'text'}
+                                                                                                     onChange={(e) => this.onChangeDynamicArrayValue(detail.id, 'value', e.target.value)}
+                                                                                                     value={detail.value}
+                                                                        />}
+                                                                    />
+                                                                </Col>
+                                                                <Col xs={1}>
+                                                                    <Button type={'button'}
+                                                                            variant={'danger'}
+                                                                            size={'sm'}
+                                                                            onClick={() => this.removeFromDynamicArray(detail)}>
+                                                                        <IconRemove/>
+                                                                    </Button>
+                                                                </Col>
+                                                            </Row>
+                                                        </div>
+                                                    )
+                                                }
+                                                {
+                                                    Boolean(this.state.currentProduct) &&
+                                                    this.state.currentProduct.product_details.length === 0 &&
+                                                    <p className={'text-danger'}>no details</p>
+                                                }
+                                            </div>
+                                        }
+                                    />
+                                </div>
 
+                            </FormGroup>
+                        </Form>
+                    </Col>
+                    <Col lg={6} xl={3}>
+                        <JsonElement value={this.state.currentProduct} label={'current product'}
+                                     id={'currentProductJSON'}
+                                     rows={20}/>
+                        <Button type={'button'} size={'sm'}
+                                onClick={this.addToProductArray}>
+                            add to products array
+                        </Button>
+                    </Col>
+                    <Col lg={12} xl={3}>
+                        <JsonElement value={this.state.productArray} label={'products array'}
+                                     id={'currentProductArrayJSON'}
+                                     rows={20}/>
+                    </Col>
+                </Row>
             </div>
         );
     }

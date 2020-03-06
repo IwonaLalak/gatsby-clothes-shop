@@ -1,6 +1,7 @@
 import React from 'react';
+import {Button, FormControl} from "react-bootstrap";
 
-const JsonElement = ({id,value,label,rows}) => {
+const JsonElement = ({id, value, label, rows}) => {
 
     const copyTextarea = (id) => {
         const el = document.getElementById(id);
@@ -10,14 +11,18 @@ const JsonElement = ({id,value,label,rows}) => {
 
     return (
         <>
-            <h5>{label}
-                <button
-                onClick={() => copyTextarea(id)}>copy</button>
+            <h5>
+                <span style={{marginRight:5}}>{label}</span>
+                <Button variant={'dark'} size={'sm'}
+                        onClick={() => copyTextarea(id)}>copy</Button>
             </h5>
-            <textarea style={{width: "100%"}}
-                      id={id}
-                      rows={rows}
-                      value={JSON.stringify(value,null,2)}
+            <FormControl
+                as={'textarea'}
+                style={{width: "100%"}}
+                className={'from-control'}
+                id={id}
+                rows={rows}
+                value={JSON.stringify(value, null, 2)}
             />
         </>
     );

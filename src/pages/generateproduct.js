@@ -5,9 +5,6 @@ import GenerateProductView from "../components/views/generateproduct/GeneratePro
 const GenerateProductPage = () => {
     return (
             <Layout>
-                <h1>
-                    generate product json
-                </h1>
                 <GenerateProductView/>
             </Layout>
     );
