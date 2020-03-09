@@ -7,7 +7,7 @@ const ProductView = ({product, addToBasket}) => {
 
     return (
         <div id={'PRODUCTVIEW'}>
-            <h1>{product.product_name}</h1>
+            <h1>{product.product_name}</h1><h4 className={'badge badge-primary'}>Price: {product.product_price} PLN</h4>
             {
                 product.product_img &&
                 <img alt={'image of ' + product.product_name} src={product.product_img}
