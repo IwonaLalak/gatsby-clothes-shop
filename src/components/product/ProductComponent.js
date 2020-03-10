@@ -1,16 +1,15 @@
 import React from 'react';
 import {Badge} from "react-bootstrap";
+import {Link} from 'gatsby'
 
 const ProductComponent = ({product}) => {
-
-    console.log(product)
 
     const renderSizes = () => (
         <ul>
             {product.product_sizes && product.product_sizes.map(size => {
                 if (size.available)
                     return (
-                        <li>
+                        <li title={`Size: ${size.size} [${size.size_number}]`}>
                             <span>{size.size}</span>
                         </li>
                     )
@@ -22,7 +21,7 @@ const ProductComponent = ({product}) => {
         <ul>
             {
                 product.product_variants && product.product_variants.map(variant => (
-                    <li>
+                    <li title={`Variant: ${variant.variant_name}`}>
                         <img src={variant.variant_icon} alt={'Variant ' + variant.variant_name}/>
                     </li>
                 ))
@@ -31,27 +30,30 @@ const ProductComponent = ({product}) => {
     );
 
     return (
-        <div className={'ProductComponent'}>
-            <div className={'img-container'}>
-                <img src={product.product_img} alt={'Image of ' + product.product_name}/>
-            </div>
-            <div className={'top-informations'}>
-                <h1>
-                    {product.product_name}
-                </h1>
-                <Badge variant={'primary'}>
-                    {product.product_price} zł
-                </Badge>
-            </div>
-            <div className={'bottom-informations'}>
-                <div className={'sizes'}>
-                    {renderSizes()}
+        <Link to={`${product.category_url}${product.subcategory_url}${product.product_url}`}>
+            <div className={'ProductComponent'}>
+                <div className={'img-container'}>
+                    <img src={product.product_img} alt={`Image of ${product.product_name}`}/>
                 </div>
-                <div className={'variants'}>
-                    {renderVariants()}
+                <div className={'top-informations'}>
+                    <h1>
+                        {product.product_name}
+                    </h1>
+                    <Badge variant={'primary'}>
+                        {product.product_price} zł
+                    </Badge>
+                </div>
+                <div className={'bottom-informations'}>
+                    <div className={'sizes'}>
+                        {renderSizes()}
+                    </div>
+                    <div className={'variants'}>
+                        {renderVariants()}
+                    </div>
                 </div>
             </div>
-        </div>
+        </Link>
+
     );
 };
 

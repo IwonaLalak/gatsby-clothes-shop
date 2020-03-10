@@ -191,6 +191,11 @@ footer #footer-bottom #copyright a:hover {
 .ProductComponent .img-container img {
   max-width: 120%;
   max-height: 120%;
+  transition: all ease 0.5s;
+}
+.ProductComponent .img-container:hover img {
+  max-width: 130%;
+  max-height: 130%;
 }
 .ProductComponent .top-informations {
   padding: 15px 15px 5px 15px;
