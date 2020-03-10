@@ -1,6 +1,6 @@
 import React from 'react';
-import LastSection from "./components/lastSection/LastSection";
-import WaveSection from "./components/waveSection/WaveSection";
+import LastSection from "./components/sections/LastSection";
+import WaveSection from "./components/sections/WaveSection";
 
 const HomeView = ({products}) => {
     return (

@@ -2,48 +2,19 @@ import React from 'react';
 import Layout from "../components/shared/layout/layout";
 import SEO from "../components/shared/seo/seo";
 import {graphql, Link} from 'gatsby';
+import CategoryView from "../components/views/category/CategoryView";
+import JsonElement from "../components/shared/forTests/jsonElement";
 
 const Category = (props) => {
     let {pageContext} = props;
     let {data: {allProducts}} = props;
 
-    const checkIfThereAreSomeProducts = (subcategory_id) => {
-
-        let products = allProducts.edges.filter(item => subcategory_id === item.node.subcategory_id);
-        if (products.length > 0)
-            return products.length
-        else
-            return 0
-    };
-
     return (
         <Layout>
             <SEO title={'category page'}/>
-            <h1>
-                Category: {pageContext.category_name}
-
-            </h1>
-            <h3>
-                {allProducts.edges.length} products
-            </h3>
-            <h5>subcategories:</h5>
-            <ul>
-                {
-                    pageContext.subcategories.map(subcategory => <li>
-                        <Link
-                            to={pageContext.category_url + subcategory.subcategory_url}>
-                            {subcategory.subcategory_name}
-                        </Link>
-                        <span style={{marginLeft: '15px'}}>
-                            {checkIfThereAreSomeProducts(subcategory.subcategory_id)} products
-                        </span>
-                    </li>)
-                }
-            </ul>
-            <div>
-                {
-                    JSON.stringify(pageContext, undefined, 2)
-                }
+            <CategoryView category={pageContext} products={allProducts}/>
+            <div style={{marginTop:'25px'}}>
+                <JsonElement label={'category page context'} value={pageContext} id={'cat_page_context'} rows={5}/>
             </div>
         </Layout>
     );
@@ -54,10 +25,25 @@ export const query = graphql`
       allProducts(filter: {category_id: {eq: $category_id}}) {
         edges {
           node {
-            id
+             id
             product_name
+            product_img
+            product_url
+            product_price
+            product_sizes{
+                size
+                size_number
+                available
+            }
+            product_variants{
+                variant_icon
+                variant_id
+                variant_name
+            }
             category_id
+            category_url
             subcategory_id
+            subcategory_url
           }
         }
       }

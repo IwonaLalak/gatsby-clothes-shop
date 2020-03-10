@@ -299,4 +299,67 @@ footer #footer-bottom #copyright a:hover {
 #PRODUCTVIEW h1 {
   color: #ae1290;
 }
+#CATEGORYVIEW section#CATEGORYHEADER {
+  padding-top: 25px;
+}
+#CATEGORYVIEW section#CATEGORYHEADER p {
+  text-align: justify;
+}
+#CATEGORYVIEW section#SUBCATEGORIES {
+  padding: 25px 0;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  height: 60px;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul li {
+  display: block;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul li a,
+#CATEGORYVIEW section#SUBCATEGORIES ul li .name,
+#CATEGORYVIEW section#SUBCATEGORIES ul li .how-many-products {
+  transition: all ease 0.3s;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul li a {
+  display: block;
+  border: 1px solid #ae1290;
+  padding: 10px 15px;
+  margin: 0 5px;
+  height: 60px;
+  text-align: center;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul li a .name {
+  color: #ae1290;
+  font-size: 20px;
+  line-height: 38px;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul li a .how-many-products {
+  font-size: 12px;
+  position: absolute;
+  top: -50%;
+  color: #fff;
+  font-style: italic;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul li a:hover {
+  background: #ae1290;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul li a:hover .name {
+  color: #fff;
+  line-height: 20px;
+}
+#CATEGORYVIEW section#SUBCATEGORIES ul li a:hover .how-many-products {
+  position: relative;
+  top: 0;
+}
+#CATEGORYVIEW section#CATEGORYPRODUCTS {
+  padding-top: 25px;
+}
+#CATEGORYVIEW section#CATEGORYPRODUCTS h1 {
+  text-align: center;
+}
 /*# sourceMappingURL=imports.css.map */
