@@ -179,7 +179,7 @@ footer #footer-bottom #copyright a:hover {
 .ProductComponent {
   border: 1px solid #e5e5e5;
   max-width: 250px;
-  margin: auto;
+  margin: 5px auto auto;
 }
 .ProductComponent .img-container {
   height: 280px;
@@ -189,8 +189,8 @@ footer #footer-bottom #copyright a:hover {
   overflow: hidden;
 }
 .ProductComponent .img-container img {
-  max-width: 110%;
-  max-height: 110%;
+  max-width: 120%;
+  max-height: 120%;
 }
 .ProductComponent .top-informations {
   padding: 15px 15px 5px 15px;
@@ -237,6 +237,7 @@ footer #footer-bottom #copyright a:hover {
 }
 #HOMEVIEW section#WAVE {
   background: linear-gradient(left, #ae1290, #60064a);
+  margin-top: 25px;
 }
 #HOMEVIEW section#WAVE .container {
   padding: 15px 0;
@@ -248,6 +249,11 @@ footer #footer-bottom #copyright a:hover {
 }
 #HOMEVIEW section#WAVE .container .wave-column.last {
   margin-top: 65px;
+}
+@media screen and (max-width: 599px) {
+  .svg-wave {
+    display: none;
+  }
 }
 #PRODUCTVIEW h1 {
   color: #ae1290;

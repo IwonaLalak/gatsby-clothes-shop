@@ -1,37 +1,46 @@
 @import "../variables";
 
 #HOMEVIEW {
-  section#LAST{
-    h1{
+  section#LAST {
+    h1 {
       text-align: center;
       margin: 50px 0 25px;
     }
   }
+
   section#WAVE {
-    background: linear-gradient(left,@primary-color, @primary-color-darkest);
-    .container{
+    background: linear-gradient(left, @primary-color, @primary-color-darkest);
+    margin-top: 25px;
 
-      padding:15px 0;
+    .container {
 
-      .wave-column{
+      padding: 15px 0;
+
+      .wave-column {
 
         h1, h2 {
           color: #fff;
           text-align: center;
         }
 
-        &.first{
+        &.first {
 
         }
 
-        &.last{
+        &.last {
           margin-top: 65px;
         }
       }
     }
 
 
-
+    }
 
   }
+
+
+  @media screen and (max-width:599px){
+    .svg-wave{
+      display:none;
+    }
 }
