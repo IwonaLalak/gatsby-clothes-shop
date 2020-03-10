@@ -8,7 +8,7 @@ const CategoryProducts = ({products}) => {
             <Container>
                 <Row>
                     <Col>
-                        <h1>NEW PRODUCTS / BESTSELLERS</h1>
+                        <h1>NEW PRODUCTS & BESTSELLERS</h1>
                     </Col>
                 </Row>
                 <Row>
