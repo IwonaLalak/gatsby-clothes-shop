@@ -23,7 +23,7 @@ header {
     line-height: 60px;
   }
 
-  #nav-container{
+  #nav-container {
 
     display: flex;
     justify-content: space-between;
@@ -102,8 +102,47 @@ header {
       }
     }
 
-    #search-nav{
+    #search-nav {
+      display: inline-flex;
+      align-items: center;
 
+      form {
+
+        display: inline-flex;
+
+        .form-control {
+          border: 0;
+          border-bottom: 1px solid grey;
+          background: transparent;
+          width: 100%;
+          transition: all ease 0.5s;
+          font-size: 14px;
+          display: inline-block;
+          border-radius: 0;
+          padding: 6px 3px;
+
+          &:focus, &:active {
+            box-shadow: none;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid @primary-color !important;
+          }
+        }
+
+
+        button {
+          padding: 6px 3px;
+          transition: all ease 0.5s;
+
+          &:focus, &:active {
+            color: @primary-color;
+            box-shadow: none;
+            outline: none;
+            border: none;
+          }
+        }
+
+      }
     }
   }
 

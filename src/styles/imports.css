@@ -125,6 +125,42 @@ header #nav-container nav ul.nav-menu .nav-li:hover ul {
   opacity: 1;
   filter: alpha(opacity=100);
 }
+header #nav-container #search-nav {
+  display: inline-flex;
+  align-items: center;
+}
+header #nav-container #search-nav form {
+  display: inline-flex;
+}
+header #nav-container #search-nav form .form-control {
+  border: 0;
+  border-bottom: 1px solid grey;
+  background: transparent;
+  width: 100%;
+  transition: all ease 0.5s;
+  font-size: 14px;
+  display: inline-block;
+  border-radius: 0;
+  padding: 6px 3px;
+}
+header #nav-container #search-nav form .form-control:focus,
+header #nav-container #search-nav form .form-control:active {
+  box-shadow: none;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ae1290 !important;
+}
+header #nav-container #search-nav form button {
+  padding: 6px 3px;
+  transition: all ease 0.5s;
+}
+header #nav-container #search-nav form button:focus,
+header #nav-container #search-nav form button:active {
+  color: #ae1290;
+  box-shadow: none;
+  outline: none;
+  border: none;
+}
 header #basket-header {
   line-height: 60px;
   display: inline-flex;
