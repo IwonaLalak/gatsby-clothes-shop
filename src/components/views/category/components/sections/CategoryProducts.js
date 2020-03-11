@@ -13,7 +13,7 @@ const CategoryProducts = ({products}) => {
                 </Row>
                 <Row>
                     {
-                        products.map(item=>
+                        products.map(item =>
                             <Col xs={12} sm={12} md={6} lg={6} xl={3}>
                                 <ProductComponent product={item.node}/>
                             </Col>
