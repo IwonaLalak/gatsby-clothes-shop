@@ -2,6 +2,8 @@ import React from 'react';
 import Layout from "../components/shared/layout/layout";
 import SEO from "../components/shared/seo/seo";
 import {graphql, Link} from "gatsby";
+import SubcategoryView from "../components/views/subcategory/SubcategoryView";
+import JsonElement from "../components/shared/forTests/jsonElement";
 
 const Subcategory = (props) => {
 
@@ -11,30 +13,12 @@ const Subcategory = (props) => {
     return (
         <Layout>
             <SEO title={'subcategory page'}/>
-            <h1>subcategory: {pageContext.subcategory_name}</h1>
-            <h5>products in subcategory:</h5>
-            <ul>
-                {
-                    allProducts.edges.map(({node}) =>
-
-                        <li>
-                            <Link to={
-                                node.category_url
-                                +
-                                node.subcategory_url
-                                +
-                                node.product_url
-                            }>
-                                {node.product_name}
-                            </Link>
-                        </li>
-                    )
-                }
-            </ul>
-            <div>
-                {
-                    JSON.stringify(pageContext, undefined, 2)
-                }
+            <SubcategoryView
+                subcategory={pageContext}
+                products={allProducts}
+            />
+            <div style={{marginTop: '25px'}}>
+                <JsonElement value={pageContext} id={'subcategoryPC'} label={'Subcategory page context'} rows={5}/>
             </div>
         </Layout>
     );
@@ -45,16 +29,26 @@ export const query = graphql`
       allProducts(filter: {subcategory_id: {eq: $subcategory_id}}) {
         edges {
           node {
-            id
+             id
             product_name
+            product_img
             product_url
+            product_price
+            product_collection
+            product_sizes{
+                size
+                size_number
+                available
+            }
+            product_variants{
+                variant_icon
+                variant_id
+                variant_name
+            }
+            category_id
+            category_url
             subcategory_id
-              category_id
-              category_name
-              category_url
-              subcategory_id
-              subcategory_name
-              subcategory_url
+            subcategory_url
           }
         }
       }

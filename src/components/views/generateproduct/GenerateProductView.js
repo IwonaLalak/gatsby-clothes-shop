@@ -6,7 +6,6 @@ import JsonElement from "../../shared/forTests/jsonElement";
 import {IconAdd, IconRemove, IconSearch} from "../../shared/icons/FontAwesomeIcons";
 import {generateNextID} from "../../../utilities/helpers/generateNextId";
 import {Button, Col, Form, FormCheck, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
-import Layout from "../../shared/layout/layout";
 
 export const FormatFormgroupRow = ({labelComponent, inputComponent, longerLabel}) => {
     return (
@@ -32,8 +31,10 @@ class GenerateProductView extends Component {
 
         currentProduct: productModel(),
 
-        productArray: []
+        productArray: [],
 
+
+        generatedProductsQuantity: 0,
     };
 
     componentDidMount() {
@@ -46,10 +47,13 @@ class GenerateProductView extends Component {
     };
 
 
-    onChangeValue(key, value) {
+    onChangeValue(key, value, isNumber = false) {
         if (value !== null && value !== undefined) {
             let obj = Object.assign({}, this.state.currentProduct);
-            obj[key] = value;
+            if (isNumber)
+                obj[key] = parseFloat(value);
+            else
+                obj[key] = value;
             this.setState({currentProduct: obj})
         }
     }
@@ -61,8 +65,9 @@ class GenerateProductView extends Component {
                 <FormatFormgroupRow
                     labelComponent={<FormLabel htmlFor={'input' + key}>{key}</FormLabel>}
                     inputComponent={<FormControl id={'input' + key} type={key === "product_price" ? "number" : "text"}
-                                                 onChange={(e) => this.onChangeValue(key, e.target.value)}
-                                                 value={this.state.currentProduct[key]}/>}
+                                                 onChange={(e) => this.onChangeValue(key, e.target.value, key === "product_price")}
+                                                 value={this.state.currentProduct[key]}
+                    />}
                 />
             </FormGroup>
         )
@@ -136,6 +141,180 @@ class GenerateProductView extends Component {
         })
     };
 
+    generateProductsInLoop = () => {
+        let arr = [];
+        const quantity = this.state.generatedProductsQuantity
+        if (quantity) {
+
+
+            for (let i = 0; i < quantity; i++) {
+
+                let obj = Object.assign({}, this.state.currentProduct);
+
+                let index = parseInt(i + 1);
+
+
+                let code = (obj.product_name.replace(' ','').substr(0, 2)).toUpperCase()
+
+                if (index < 10) {
+                    code = code + '000' + index
+                } else if (index < 100) {
+                    code = code + '00' + index
+                } else if (index < 1000) {
+                    code = code + '0' + index
+                } else {
+                    code = code + index
+                }
+
+                obj.product_id = parseInt(index + 1 + obj.product_id)
+                obj.product_name = obj.product_name + " " + index;
+                obj.product_code = code;
+                obj.product_price = this._helper_generatePrice();
+                obj.product_sizes = this._helper_generateSizes();
+                obj.product_details = this._helper_generateDetails();
+                obj.product_variants = this._helper_generateVariants();
+                obj.product_url="/"+obj.product_name.replace(' ','').substr(0,5)+'-'+code;
+
+                arr.push(obj)
+            }
+
+
+        }
+
+        this.setState({productArray: arr})
+    }
+
+    _helper_generateSizes = () => {
+        let howManyShouldBeTrue = this._helper_returnRandomValue(1, 6);
+
+        let arr = [];
+
+        for (let i = 0; i < howManyShouldBeTrue; i++) {
+            arr.push(this._helper_returnRandomValue(1, 6))
+        }
+
+        let sizes = [
+            {
+                "size": "xs",
+                "size_number": 34,
+                "available": false
+            },
+            {
+                "size": "s",
+                "size_number": 36,
+                "available": false
+            },
+            {
+                "size": "m",
+                "size_number": 38,
+                "available": false
+            },
+            {
+                "size": "l",
+                "size_number": 40,
+                "available": false
+            },
+            {
+                "size": "xl",
+                "size_number": 42,
+                "available": false
+            },
+            {
+                "size": "xxl",
+                "size_number": 44,
+                "available": false
+            }
+        ];
+
+        sizes.map((size, index) => {
+            if (arr.find(s => s === (index + 1))) {
+                size.available = true;
+            }
+        })
+
+        return sizes;
+    };
+
+    _helper_generateDetails = () => {
+        let willBeDetails = Boolean(this._helper_returnRandomValue(0, 1))
+
+        if (willBeDetails) {
+
+            let quantity = this._helper_returnRandomValue(1, 10)
+            let arr = [];
+
+            for (let i = 0; i < quantity; i++) {
+                arr.push({
+                    "id": (i + 1),
+                    "key": "key " + (i + 1),
+                    "value": "value" + (i + 1)
+                })
+            }
+
+            return (arr)
+        } else {
+            return []
+        }
+    };
+
+    _helper_generateVariants = () => {
+        let willBeVariants = Boolean(this._helper_returnRandomValue(0, 1));
+        if (willBeVariants) {
+
+            let quantity = this._helper_returnRandomValue(1, 4);
+            let arr = [];
+            const variants = [
+                "beige.jpeg",
+                "black.jpeg",
+                "brown.jpeg",
+                "dark_gray.jpeg",
+                "dark_green.jpeg",
+                "dark_jeans.jpeg",
+                "dark_red.jpeg",
+                "intense_pink.jpeg",
+                "intense_red.jpeg",
+                "light_grey.jpeg",
+                "light_jeans.jpeg",
+                "light_pink.jpeg",
+                'lime',
+                "medium_jeans.jpeg",
+                "mint.jpeg",
+                "navy.jpeg",
+                "orange.jpeg",
+                "turquise.jpeg",
+                "violet.jpeg",
+                "white.jpeg",
+                "yellow.jpeg"
+            ];
+
+            for (let i = 0; i < quantity; i++) {
+
+                let radomIndex = this._helper_returnRandomValue(0, 20);
+
+                arr.push(
+                    {
+                        "variant_id": (i + 1),
+                        "variant_name": variants[radomIndex],
+                        "variant_icon": "https://iwonalalak.pl/colors/" + variants[radomIndex]
+                    }
+                )
+
+            }
+
+            return arr;
+        } else return []
+    };
+
+    _helper_generatePrice = () => {
+        let decimalPrecision = Boolean(this._helper_returnRandomValue(0, 1))
+
+        return parseFloat(((Math.random(0, 1) * 100)).toPrecision(decimalPrecision ? 2 : 4))
+    };
+
+    _helper_returnRandomValue = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+
     render() {
 
         const keys = ["product_name", "product_code", "product_price", "product_url", "product_img", "product_desc", "product_collection"];
@@ -144,9 +323,9 @@ class GenerateProductView extends Component {
             <div id={'GENERATE_PRODUCT_VIEW'} style={{padding: '15px'}}>
                 <Row>
                     <Col xl={12}>
-                        <h1 style={{marginBottom:'25px'}}>
+                        <h1 style={{marginBottom: '25px'}}>
                             generate product json
-                            <small style={{marginLeft:'15px',color:'grey'}}>
+                            <small style={{marginLeft: '15px', color: 'grey'}}>
                                 just for tests..
                             </small>
                         </h1>
@@ -161,7 +340,7 @@ class GenerateProductView extends Component {
                                     inputComponent={<FormControl type={'number'}
                                                                  onChange={(e) => {
                                                                      this.setState({id: e.target.value});
-                                                                     this.onChangeValue("product_id", e.target.value);
+                                                                     this.onChangeValue("product_id", e.target.value, true);
                                                                  }}
                                                                  defaultValue={this.state.id}
                                                                  value={this.state.id}
@@ -375,6 +554,32 @@ class GenerateProductView extends Component {
                         <JsonElement value={this.state.productArray} label={'products array'}
                                      id={'currentProductArrayJSON'}
                                      rows={20}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <h1 style={{marginBottom: '25px'}}>
+                        generate products json
+                        <small style={{marginLeft: '15px', color: 'grey'}}>
+                            in loop
+                        </small>
+                    </h1>
+                </Row>
+                <Row>
+                    <Col lg={6}>
+                        <p>Fill those fields: category,subcategory,
+                            product_name,product_img,product_desc,product_collection</p>
+                        <FormControl type={'number'}
+                                     onChange={(e) => this.setState({generatedProductsQuantity: e.target.value})}
+                                     placeholder={'How many should be products?'}
+                        />
+
+                    </Col>
+                    <Col lg={6}>
+                        <p>
+                            Result will be in products array field
+                        </p>
+                        <Button variant={'warning'} onClick={this.generateProductsInLoop}>generate in loop</Button>
+
                     </Col>
                 </Row>
             </div>
