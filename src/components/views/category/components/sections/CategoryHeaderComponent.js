@@ -2,8 +2,9 @@ import React from 'react';
 import {Container, Row, Col} from "react-bootstrap";
 
 const CategoryHeaderSection = ({category}) => {
+
     return (
-        <section id={'CATEGORYHEADER'}>
+        <section id={'CATEGORYHEADER'} className={'variant-'+category.category_name}>
             <Container>
                 <Row>
                     <Col>

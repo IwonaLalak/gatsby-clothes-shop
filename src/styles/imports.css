@@ -300,10 +300,26 @@ footer #footer-bottom #copyright a:hover {
   color: #ae1290;
 }
 #CATEGORYVIEW section#CATEGORYHEADER {
-  padding-top: 25px;
+  padding-top: 50px;
+  padding-bottom: 25px;
+  background-size: 50%;
+}
+#CATEGORYVIEW section#CATEGORYHEADER h1,
+#CATEGORYVIEW section#CATEGORYHEADER p {
+  color: #fff;
+  text-shadow: 1px 1px 3px #333;
 }
 #CATEGORYVIEW section#CATEGORYHEADER p {
   text-align: justify;
+}
+#CATEGORYVIEW section#CATEGORYHEADER.variant-Women {
+  background: url('../images/women.jpg') center 40%;
+}
+#CATEGORYVIEW section#CATEGORYHEADER.variant-Men {
+  background: url('../images/men.jpg') center 30%;
+}
+#CATEGORYVIEW section#CATEGORYHEADER.variant-Kids {
+  background: url('../images/kids.jpg') center 40%;
 }
 #CATEGORYVIEW section#SUBCATEGORIES {
   padding: 25px 0;

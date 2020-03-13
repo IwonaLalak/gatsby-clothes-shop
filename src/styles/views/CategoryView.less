@@ -3,11 +3,30 @@
 #CATEGORYVIEW {
 
   section#CATEGORYHEADER {
-    padding-top: 25px;
+    padding-top: 50px;
+    padding-bottom: 25px;
+    background-size: 50%;
+
+    h1, p {
+      color: #fff;
+      text-shadow:1px 1px 3px #333;
+    }
 
     p {
       text-align: justify;
     }
+
+
+    &.variant-Women {
+      background: url('./../images/women.jpg') center 40%;
+    }
+    &.variant-Men{
+      background: url('./../images/men.jpg') center 30%;
+    }
+    &.variant-Kids{
+      background: url('./../images/kids.jpg') center 40%;
+    }
+
   }
 
   section#SUBCATEGORIES {
@@ -20,7 +39,7 @@
       display: inline-flex;
       justify-content: center;
       align-content: center;
-      height:60px;
+      height: 60px;
 
       li {
         display: block;
@@ -61,7 +80,7 @@
 
             .how-many-products {
               position: relative;
-              top:0;
+              top: 0;
             }
           }
         }
@@ -69,9 +88,10 @@
     }
   }
 
-  section#CATEGORYPRODUCTS{
-    padding-top:25px;
-    h1{
+  section#CATEGORYPRODUCTS {
+    padding-top: 25px;
+
+    h1 {
       text-align: center;
     }
   }
