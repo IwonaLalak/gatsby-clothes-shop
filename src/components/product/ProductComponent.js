@@ -1,6 +1,7 @@
 import React from 'react';
 import {Badge} from "react-bootstrap";
 import {Link} from 'gatsby'
+import { formatMoney } from "../../utilities/formatters/money"
 
 const ProductComponent = ({product}) => {
 
@@ -40,7 +41,7 @@ const ProductComponent = ({product}) => {
                         {product.product_name}
                     </h1>
                     <Badge variant={'primary'}>
-                        {product.product_price} zł
+                        {formatMoney(product.product_price)}
                     </Badge>
                 </div>
                 <div className={'bottom-informations'}>
