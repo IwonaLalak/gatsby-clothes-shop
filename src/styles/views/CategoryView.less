@@ -3,30 +3,25 @@
 #CATEGORYVIEW {
 
   section#CATEGORYHEADER {
-    padding-top: 50px;
-    padding-bottom: 25px;
-    background-size: 50%;
 
-    h1, p {
-      color: #fff;
-      text-shadow: @text-shadow;
+    .gatsby-image-wrapper{
+      max-height: 35vh;
     }
 
-    p {
-      text-align: justify;
-    }
+    .category-caption{
+      margin-top: 60px;
+      position:absolute;
+      width:100%;
+      top:0;
+      padding: 50px 25px 0 25px;
+      h1, p {
+        color: #fff;
+        text-shadow: @text-shadow;
+      }
 
-
-    &.variant-Women {
-      background: url('./../images/women.jpg') center 40%;
-    }
-
-    &.variant-Men {
-      background: url('./../images/men.jpg') center 30%;
-    }
-
-    &.variant-Kids {
-      background: url('./../images/kids.jpg') center 40%;
+      p {
+        text-align: justify;
+      }
     }
 
   }

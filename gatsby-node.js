@@ -29,7 +29,7 @@ exports.createPages = async ({actions: {createPage}}) => {
         createPage({
             path: `${category.category_url}`,
             component: require.resolve('./src/templates/category.js'),
-            context: category
+            context: Object.assign(category,{bannerimg:`category/${category.category_name.toLowerCase()}.jpg`})
         });
 
         if (Boolean(category.subcategories)) {
