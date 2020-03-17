@@ -8,6 +8,25 @@
     }
   }
 
+  section#BANNER {
+    .carousel-item {
+      max-height: 45vh;
+    }
+    .carousel-caption{
+   //   bottom:30%;
+      h3,p{
+        text-shadow:@text-shadow
+      }
+      h3{
+        font-size: 3rem;
+      }
+      p{
+        font-size:2rem;
+      }
+    }
+
+  }
+
   section#WAVE {
     background: linear-gradient(left, @primary-color, @primary-color-darkest);
     margin-top: 25px;
@@ -34,13 +53,13 @@
     }
 
 
-    }
-
   }
 
+}
 
-  @media screen and (max-width:599px){
-    .svg-wave{
-      display:none;
-    }
+
+@media screen and (max-width: 599px) {
+  .svg-wave {
+    display: none;
+  }
 }

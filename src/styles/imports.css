@@ -276,6 +276,19 @@ footer #footer-bottom #copyright a:hover {
   text-align: center;
   margin: 50px 0 25px;
 }
+#HOMEVIEW section#BANNER .carousel-item {
+  max-height: 45vh;
+}
+#HOMEVIEW section#BANNER .carousel-caption h3,
+#HOMEVIEW section#BANNER .carousel-caption p {
+  text-shadow: 1px 1px 3px #333;
+}
+#HOMEVIEW section#BANNER .carousel-caption h3 {
+  font-size: 3rem;
+}
+#HOMEVIEW section#BANNER .carousel-caption p {
+  font-size: 2rem;
+}
 #HOMEVIEW section#WAVE {
   background: linear-gradient(left, #ae1290, #60064a);
   margin-top: 25px;
@@ -313,13 +326,13 @@ footer #footer-bottom #copyright a:hover {
   text-align: justify;
 }
 #CATEGORYVIEW section#CATEGORYHEADER.variant-Women {
-  background: url('../images/women.jpg') center 40%;
+  background: url('../images/category/women.jpg') center 40%;
 }
 #CATEGORYVIEW section#CATEGORYHEADER.variant-Men {
-  background: url('../images/men.jpg') center 30%;
+  background: url('../images/category/men.jpg') center 30%;
 }
 #CATEGORYVIEW section#CATEGORYHEADER.variant-Kids {
-  background: url('../images/kids.jpg') center 40%;
+  background: url('../images/category/kids.jpg') center 40%;
 }
 #CATEGORYVIEW section#SUBCATEGORIES {
   padding: 25px 0;
