@@ -2,6 +2,9 @@ import React from 'react';
 import {Badge} from "react-bootstrap";
 import {Link} from 'gatsby'
 import { formatMoney } from "../../utilities/formatters/money"
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const ProductComponent = ({product}) => {
 
@@ -34,7 +37,7 @@ const ProductComponent = ({product}) => {
         <Link to={`${product.category_url}${product.subcategory_url}${product.product_url}`}>
             <div className={'ProductComponent'}>
                 <div className={'img-container'}>
-                    <img src={product.product_img} alt={`Image of ${product.product_name}`}/>
+                    <LazyLoadImage src={product.product_img} alt={`Image of ${product.product_name}`} effect={'blur'}/>
                 </div>
                 <div className={'top-informations'}>
                     <h1>

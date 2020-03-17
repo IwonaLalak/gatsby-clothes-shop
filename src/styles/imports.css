@@ -218,16 +218,19 @@ footer #footer-bottom #copyright a:hover {
   margin: 5px auto auto;
 }
 .ProductComponent .img-container {
-  height: 280px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
+.ProductComponent .img-container span {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 280px;
+}
 .ProductComponent .img-container img {
+  display: flex;
   max-width: 120%;
   max-height: 120%;
-  transition: all ease 0.5s;
+  transition: all ease 0.5s !important;
 }
 .ProductComponent .img-container:hover img {
   max-width: 130%;

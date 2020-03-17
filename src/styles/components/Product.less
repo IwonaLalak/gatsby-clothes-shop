@@ -3,27 +3,28 @@
 .ProductComponent {
 
   border: 1px solid @border-gray-color;
-
-
   max-width: 250px;
   margin: 5px auto auto;
 
   .img-container {
-
-    height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
 
-    img {
-      max-width: 120%;
-      max-height: 120%;
-      transition: all ease 0.5s;
+    span {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      height: 280px;
     }
 
-    &:hover{
-      img{
+    img {
+      display: flex;
+      max-width: 120%;
+      max-height: 120%;
+      transition: all ease 0.5s !important;
+    }
+
+    &:hover {
+      img {
         max-width: 130%;
         max-height: 130%;
       }
