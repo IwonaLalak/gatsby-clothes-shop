@@ -293,8 +293,12 @@ footer #footer-bottom #copyright a:hover {
   font-size: 2rem;
 }
 #HOMEVIEW section#WAVE {
-  background: linear-gradient(left, #ae1290, #60064a);
   margin-top: 25px;
+  background: #60064a;
+  background: linear-gradient(left, #c054b5, #60064a);
+  background-repeat: repeat;
+  background-size: 200% 100%;
+  transition: all 1s ease;
 }
 #HOMEVIEW section#WAVE .container {
   padding: 15px 0;
@@ -306,6 +310,14 @@ footer #footer-bottom #copyright a:hover {
 }
 #HOMEVIEW section#WAVE .container .wave-column.last {
   margin-top: 65px;
+}
+#HOMEVIEW ul.scrollspy {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+#HOMEVIEW ul.scrollspy section.is-current {
+  background-position: 100% 0 !important;
 }
 @media screen and (max-width: 599px) {
   .svg-wave {

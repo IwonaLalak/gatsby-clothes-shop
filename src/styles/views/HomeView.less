@@ -12,24 +12,32 @@
     .carousel-item {
       max-height: 45vh;
     }
-    .carousel-caption{
-   //   bottom:30%;
-      h3,p{
-        text-shadow:@text-shadow
+
+    .carousel-caption {
+      //   bottom:30%;
+      h3, p {
+        text-shadow: @text-shadow
       }
-      h3{
+
+      h3 {
         font-size: 3rem;
       }
-      p{
-        font-size:2rem;
+
+      p {
+        font-size: 2rem;
       }
     }
 
   }
 
   section#WAVE {
-    background: linear-gradient(left, @primary-color, @primary-color-darkest);
     margin-top: 25px;
+
+    background: @primary-color-darkest;
+    background: linear-gradient(left,@primary-color-lighter, @primary-color-darkest);
+    background-repeat: repeat;
+    background-size: 200% 100%;
+    transition: all 1s ease;
 
     .container {
 
@@ -51,10 +59,18 @@
         }
       }
     }
-
-
   }
 
+  ul.scrollspy{
+    margin:0;
+    padding:0;
+    display:block;
+    section {
+      &.is-current {
+        background-position: 100% 0 !important;
+      }
+    }
+  }
 }
 
 
