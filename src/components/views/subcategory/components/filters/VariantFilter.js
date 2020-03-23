@@ -1,20 +1,10 @@
 import React from "react"
 import Select from "react-select"
-import { Badge } from "react-bootstrap"
-import { isLight } from "../../../../../utilities/colors/tinycolor"
-import { IconDelete } from "../../../../shared/icons/FontAwesomeIcons"
 
 class VariantFilter extends React.Component {
 
   state = {
     values: [],
-  }
-
-  removeFromValuesArray = (obj) => {
-    alert("aa")
-    let arr = this.state.values
-    arr.splice(arr.findIndex(o => o.key === obj.key), 1)
-    this.setState({ values: arr })
   }
 
   render() {
@@ -60,7 +50,10 @@ class VariantFilter extends React.Component {
           value={values}
           getOptionLabel={({ key }) => key}
           getOptionValue={({ value }) => value}
-          onChange={(e) => this.setState({ values: e })}
+          onChange={(e) => {
+            this.setState({ values: e })
+            this.props.handleChangeActiveFilters(filter.field, e)
+          }}
           components={{ MultiValueLabel: customComponent, Option: customComponent }}
         />
       </div>

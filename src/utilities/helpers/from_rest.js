@@ -57,7 +57,21 @@ export const REST_COLORS = [
   { "value": "colors/yellow.jpeg", "key": "yellow", "hex": "#f5ff00" },
 ]
 
+export const REST_SIZES = [{ "size": "xs", "size_number": 34 }, {
+  "size": "s",
+  "size_number": 36,
+}, { "size": "m", "size_number": 38 }, {
+  "size": "l",
+  "size_number": 40,
+}, { "size": "xl", "size_number": 42 }, { "size": "xxl", "size_number": 44 }]
+
 export const REST_FILTERS = [
+  {
+    name:"Bestseller",
+    field:"product_collection",
+    type:'checkbox',
+    values:[true,false]
+  },
   {
     name: "Price",
     field: "product_price",
@@ -70,6 +84,12 @@ export const REST_FILTERS = [
     field: "product_variant",
     type: "select",
     options: REST_COLORS,
+  },
+  {
+    name: "Size",
+    field: "product_size",
+    type: "select",
+    options: REST_SIZES,
   },
 
 ]

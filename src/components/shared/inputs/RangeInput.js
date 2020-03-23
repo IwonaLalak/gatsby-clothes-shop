@@ -54,6 +54,7 @@ class RangeInput extends React.Component {
             onChange={values => {
               this.setState({ values })
             }}
+            onFinalChange={values=>this.props.onChange(values)}
             renderTrack={({ props, children }) => (
               <div
                 onMouseDown={props.onMouseDown}
