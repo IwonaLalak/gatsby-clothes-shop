@@ -7,6 +7,12 @@ class SizeFilter extends React.Component {
     values: [],
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (JSON.stringify(prevProps.filter.currentValue) !== JSON.stringify(this.state.values)) {
+      this.setState({ values: this.props.filter.currentValue })
+    }
+  }
+
   render() {
     let { filter } = this.props
     let { values } = this.state
@@ -22,7 +28,7 @@ class SizeFilter extends React.Component {
         margin: "1px 5px",
         textAlign: "center",
         verticalAlign: "center",
-      }}>{data.size}</span>
+      }}>{data.key}</span>
 
       </div>)
 
@@ -44,8 +50,8 @@ class SizeFilter extends React.Component {
           isMulti={true}
           options={filter.options}
           value={values}
-          getOptionLabel={({ size }) => size}
-          getOptionValue={({ size_number }) => size_number}
+          getOptionLabel={({ key }) => key}
+          getOptionValue={({ value }) => value}
           onChange={(e) => {
             this.setState({ values: e })
             this.props.handleChangeActiveFilters(filter.field, e)

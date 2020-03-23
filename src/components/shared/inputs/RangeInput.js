@@ -16,6 +16,13 @@ class RangeInput extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+      this.setState({
+        values: this.props.values,
+      })
+    }
+  }
 
   render() {
 
@@ -43,7 +50,7 @@ class RangeInput extends React.Component {
             display: "flex",
             justifyContent: "center",
             flexWrap: "wrap",
-            margin:'0 5px'
+            margin: "0 5px",
           }}
         >
           <Range
@@ -54,7 +61,7 @@ class RangeInput extends React.Component {
             onChange={values => {
               this.setState({ values })
             }}
-            onFinalChange={values=>this.props.onChange(values)}
+            onFinalChange={values => this.props.onChange(values)}
             renderTrack={({ props, children }) => (
               <div
                 onMouseDown={props.onMouseDown}

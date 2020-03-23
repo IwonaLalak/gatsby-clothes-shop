@@ -7,6 +7,12 @@ class VariantFilter extends React.Component {
     values: [],
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (JSON.stringify(prevProps.filter.currentValue) !== JSON.stringify(this.state.values)) {
+      this.setState({ values: this.props.filter.currentValue })
+    }
+  }
+
   render() {
     let { filter } = this.props
     let { values } = this.state

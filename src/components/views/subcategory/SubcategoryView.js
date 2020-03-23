@@ -3,59 +3,70 @@ import SubcategoryHeaderSection from "./components/sections/SubcategoryHeaderSec
 import { Col, Container, Row } from "react-bootstrap"
 import SubcategoryProducts from "./components/sections/SubcategoryProducts"
 import SubcategoryFiltersSection from "./components/sections/SubcategoryFiltersSection"
-import * as _ from "lodash"
+import { REST_FILTERS } from "../../../utilities/helpers/from_rest"
 
 class SubcategoryView extends React.Component {
 
   state = {
-    activeFilters: [],
+    filters: [],
     products: [],
   }
 
   componentDidMount() {
     this.setState({
       products: Array.from(this.props.products.edges),
+      filters: REST_FILTERS,
     })
   }
 
-
   onChangeActiveFilters = (field, value) => {
-    let arr = this.state.activeFilters
+    let arr = this.state.filters
     let obj = arr.find(i => i.field === field)
     if (obj) {
-      obj.value = value
-    } else {
-      arr.push({ field, value })
+      obj.currentValue = value
     }
-
-    this.setState({ activeFilters: arr })
+    this.setState({ filters: arr })
     this.filterProducts(arr)
   }
 
   onClickClearFilters = () => {
-    console.log(this.state.activeFilters)
+    let arr = this.state.filters
+    arr.forEach(filter => {
+      if (filter.field === "product_collection")
+        filter.currentValue = false
+      if (filter.field === "product_price")
+        filter.currentValue = [filter.options[0].value, filter.options[1].value]
+      if (filter.field === "product_variant")
+        filter.currentValue = []
+      if (filter.field === "product_size")
+        filter.currentValue = []
+    })
+
+    this.setState({ filters: arr })
+    this.filterProducts(arr)
   }
 
-  filterProducts = (arr = this.state.activeFilters) => {
+  filterProducts = (arr = this.state.filters) => {
     let products = Array.from(this.props.products.edges)
 
     arr.forEach(filter => {
 
       if (filter.field === "product_collection") {
-        products = products.filter(p => p.node[filter.field].toLowerCase().indexOf("bestseller") > -1)
+        if (filter.currentValue)
+          products = products.filter(p => p.node[filter.field].toLowerCase().indexOf("bestseller") > -1)
       }
       if (filter.field === "product_price") {
-        products = products.filter(p => filter.value[0] <= p.node[filter.field] && p.node[filter.field] <= filter.value[1])
+        products = products.filter(p => filter.currentValue[0] <= p.node[filter.field] && p.node[filter.field] <= filter.currentValue[1])
       }
       if (filter.field === "product_variant") {
         // todo zmienic bo nieoptymalne
 
-        if (Boolean(filter.value) && filter.value.length > 0) {
+        if (Boolean(filter.currentValue) && filter.currentValue.length > 0) {
           let filteredArray = []
           products.forEach(product => {
             if (product.node.product_variants.length > 0) {
-              for (let i = 0; i < filter.value.length; i++) {
-                if (product.node.product_variants.find(v => v.variant_icon.indexOf(filter.value[i].value) > -1)) {
+              for (let i = 0; i < filter.currentValue.length; i++) {
+                if (product.node.product_variants.find(v => v.variant_icon.indexOf(filter.currentValue[i].value) > -1)) {
                   filteredArray.push(product)
                   break
                 }
@@ -67,12 +78,12 @@ class SubcategoryView extends React.Component {
       }
 
       if (filter.field === "product_size") {
-        if (Boolean(filter.value) && filter.value.length > 0) {
+        if (Boolean(filter.currentValue) && filter.currentValue.length > 0) {
           let filteredArray = []
           products.forEach(product => {
 
-            for (let i = 0; i < filter.value.length; i++) {
-              if (product.node.product_sizes.find(s => s.size === filter.value[i].size && s.available)) {
+            for (let i = 0; i < filter.currentValue.length; i++) {
+              if (product.node.product_sizes.find(s => s.size === filter.currentValue[i].key && s.available)) {
                 filteredArray.push(product)
                 break
               }
@@ -88,7 +99,7 @@ class SubcategoryView extends React.Component {
 
   render() {
     let { subcategory } = this.props
-    let { products } = this.state
+    let { products, filters } = this.state
 
     return (
       <div id={"SUBCATEGORYVIEW"}>
@@ -96,9 +107,14 @@ class SubcategoryView extends React.Component {
         <Container>
           <Row>
             <Col lg={3} xl={3}>
-              <SubcategoryFiltersSection handleChangeActiveFilters={this.onChangeActiveFilters}
-                                         handleClickClearFilters={this.onClickClearFilters}
-              />
+              {
+                (Boolean(filters) && filters.length > 0) &&
+                <SubcategoryFiltersSection
+                  filters={filters}
+                  handleChangeActiveFilters={this.onChangeActiveFilters}
+                  handleClickClearFilters={this.onClickClearFilters}
+                />
+              }
             </Col>
             <Col lg={9} xl={9}>
               <SubcategoryProducts products={products}/>

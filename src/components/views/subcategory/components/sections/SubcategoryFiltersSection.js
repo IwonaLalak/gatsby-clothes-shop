@@ -1,15 +1,12 @@
 import React from "react"
 import PriceFilter from "../filters/PriceFilter"
 import VariantFilter from "../filters/VariantFilter"
-import { REST_FILTERS } from "../../../../../utilities/helpers/from_rest"
 import SizeFilter from "../filters/SizeFilter"
 import CheckboxFilter from "../filters/CheckboxFilter"
 import { IconDelete } from "../../../../shared/icons/FontAwesomeIcons"
 
 
-const SubcategoryFiltersSection = ({ handleChangeActiveFilters, handleClickClearFilters }) => {
-
-  const filters = REST_FILTERS
+const SubcategoryFiltersSection = ({ filters, handleChangeActiveFilters, handleClickClearFilters }) => {
 
   return (
     <section id={"SUBCATEGORYFILTERS"}>

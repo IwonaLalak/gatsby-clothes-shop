@@ -57,39 +57,44 @@ export const REST_COLORS = [
   { "value": "colors/yellow.jpeg", "key": "yellow", "hex": "#f5ff00" },
 ]
 
-export const REST_SIZES = [{ "size": "xs", "size_number": 34 }, {
-  "size": "s",
-  "size_number": 36,
-}, { "size": "m", "size_number": 38 }, {
-  "size": "l",
-  "size_number": 40,
-}, { "size": "xl", "size_number": 42 }, { "size": "xxl", "size_number": 44 }]
+export const REST_SIZES = [
+  { "key": "xs", "value": 34 },
+  { "key": "s", "value": 36 },
+  { "key": "m", "value": 38 },
+  { "key": "l", "value": 40 },
+  { "key": "xl", "value": 42 },
+  { "key": "xxl", "value": 44 },
+]
 
 export const REST_FILTERS = [
   {
-    name:"Bestseller",
-    field:"product_collection",
-    type:'checkbox',
-    values:[true,false]
+    name: "Bestseller",
+    field: "product_collection",
+    type: "checkbox",
+    options: [true, false],
+    currentValue: false,
   },
   {
     name: "Price",
     field: "product_price",
     type: "range",
-    values: [{ type: "min", value: 1 }, { type: "max", value: 1000 }],
-    others: [{ type: "step", value: 0.01 }],
+    options: [{ key: "min", value: 1 }, { key: "max", value: 1000 }],
+    others: [{ key: "step", value: 0.01 }],
+    currentValue: [1, 1000],
   },
   {
     name: "Variant",
     field: "product_variant",
     type: "select",
     options: REST_COLORS,
+    currentValue: [],
   },
   {
     name: "Size",
     field: "product_size",
     type: "select",
     options: REST_SIZES,
+    currentValue: [],
   },
 
 ]
