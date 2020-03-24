@@ -220,13 +220,27 @@ footer #footer-bottom #copyright a:hover {
 .ProductComponent .img-container {
   overflow: hidden;
 }
+.ProductComponent .img-container .bestseller-label {
+  z-index: 999;
+  position: absolute;
+  display: inline-block;
+  background: #ae1290;
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 6px;
+  margin-top: 5px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
 .ProductComponent .img-container span {
+  z-index: 99;
   display: flex !important;
   align-items: center;
   justify-content: center;
   height: 280px;
 }
 .ProductComponent .img-container img {
+  z-index: 99;
   display: flex;
   max-width: 120%;
   max-height: 120%;

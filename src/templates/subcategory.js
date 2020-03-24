@@ -36,6 +36,7 @@ export const query = graphql`
             product_url
             product_price
             product_collection
+            product_bestseller
             product_sizes{
                 size
                 size_number

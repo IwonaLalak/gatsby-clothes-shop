@@ -4,6 +4,7 @@ import {Link} from 'gatsby'
 import { formatMoney } from "../../utilities/formatters/money"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { IconStar } from "../shared/icons/FontAwesomeIcons"
 
 
 const ProductComponent = ({product}) => {
@@ -37,6 +38,12 @@ const ProductComponent = ({product}) => {
         <Link to={`${product.category_url}${product.subcategory_url}${product.product_url}`}>
             <div className={'ProductComponent'}>
                 <div className={'img-container'}>
+                    {
+                        product.product_bestseller &&
+                        <div className={"bestseller-label"}>
+                            <IconStar/> Bestseller
+                        </div>
+                    }
                     <LazyLoadImage src={product.product_img} alt={`Image of ${product.product_name}`} effect={'blur'}/>
                 </div>
                 <div className={'top-informations'}>

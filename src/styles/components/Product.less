@@ -9,7 +9,21 @@
   .img-container {
     overflow: hidden;
 
+    .bestseller-label {
+      z-index: 999;
+      position: absolute;
+      display: inline-block;
+      background: @primary-color;
+      color: #fff;
+      font-size:12px;
+      padding: 3px 6px;
+      margin-top:5px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
     span {
+      z-index: 99;
       display: flex !important;
       align-items: center;
       justify-content: center;
@@ -17,6 +31,7 @@
     }
 
     img {
+      z-index: 99;
       display: flex;
       max-width: 120%;
       max-height: 120%;
