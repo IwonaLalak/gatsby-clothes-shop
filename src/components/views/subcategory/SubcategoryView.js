@@ -3,19 +3,23 @@ import SubcategoryHeaderSection from "./components/sections/SubcategoryHeaderSec
 import { Col, Container, Row } from "react-bootstrap"
 import SubcategoryProducts from "./components/sections/SubcategoryProducts"
 import SubcategoryFiltersSection from "./components/sections/SubcategoryFiltersSection"
-import { REST_FILTERS } from "../../../utilities/helpers/from_rest"
+import { REST_FILTERS, REST_SORTERS } from "../../../utilities/helpers/from_rest"
+import ProductSorter from "./components/sorters/ProductSorter"
 
 class SubcategoryView extends React.Component {
 
   state = {
     filters: [],
     products: [],
+    sorters: [],
+    currentSort: null,
   }
 
   componentDidMount() {
     this.setState({
       products: Array.from(this.props.products.edges),
       filters: REST_FILTERS,
+      sorters: REST_SORTERS,
     })
   }
 
@@ -94,12 +98,40 @@ class SubcategoryView extends React.Component {
       }
     })
 
-    this.setState({ products })
+    this.sortProducts(this.state.currentSort, products)
+  }
+
+  onChangeSort = (e) => {
+    this.setState({ currentSort: e })
+    this.sortProducts(e)
+  }
+
+  sortProducts = (sort = this.state.currentSort, products = this.state.products) => {
+    let arr = Array.from(products)
+
+    if (sort === null) {
+
+      arr.sort((x, y) => {
+        if (x.node.product_id < y.node.product_id) return -1
+        else return 1
+      })
+
+    } else {
+
+      arr.sort((x, y) => {
+        if (x.node[sort.field] < y.node[sort.field])
+          return (sort.ascending) ? -1 : 1
+        else return (sort.ascending) ? 1 : -1
+      })
+
+    }
+
+    this.setState({ products: arr })
   }
 
   render() {
     let { subcategory } = this.props
-    let { products, filters } = this.state
+    let { products, filters, sorters, currentSort } = this.state
 
     return (
       <div id={"SUBCATEGORYVIEW"}>
@@ -117,6 +149,11 @@ class SubcategoryView extends React.Component {
               }
             </Col>
             <Col lg={9} xl={9}>
+              <ProductSorter
+                options={sorters}
+                value={currentSort}
+                handleChangeSort={this.onChangeSort}
+              />
               <SubcategoryProducts products={products}/>
             </Col>
           </Row>

@@ -98,3 +98,24 @@ export const REST_FILTERS = [
   },
 
 ]
+
+export const REST_SORTERS = [
+  {
+    key: "Price ascending",
+    value: "price-asc",
+    field: "product_price",
+    ascending: true,
+  },
+  {
+    key: "Price descending",
+    value: "price-desc",
+    field: "product_price",
+    ascending: false,
+  },
+  {
+    key: "Bestsellers first",
+    value: "bestsellers-first",
+    field: "product_bestseller",
+    ascending: false,
+  },
+]
