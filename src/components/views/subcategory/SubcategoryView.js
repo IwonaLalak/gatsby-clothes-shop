@@ -55,9 +55,9 @@ class SubcategoryView extends React.Component {
 
     arr.forEach(filter => {
 
-      if (filter.field === "product_collection") {
+      if (filter.field === "product_bestseller") {
         if (filter.currentValue)
-          products = products.filter(p => p.node[filter.field].toLowerCase().indexOf("bestseller") > -1)
+          products = products.filter(p => p.node[filter.field])
       }
       if (filter.field === "product_price") {
         products = products.filter(p => filter.currentValue[0] <= p.node[filter.field] && p.node[filter.field] <= filter.currentValue[1])

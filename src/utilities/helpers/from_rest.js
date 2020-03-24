@@ -69,7 +69,7 @@ export const REST_SIZES = [
 export const REST_FILTERS = [
   {
     name: "Bestseller",
-    field: "product_collection",
+    field: "product_bestseller",
     type: "checkbox",
     options: [true, false],
     currentValue: false,
