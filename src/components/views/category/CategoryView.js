@@ -9,7 +9,7 @@ const CategoryView = ({category,products,bannerImage}) => {
         <div id={'CATEGORYVIEW'}>
             <CategoryHeaderSection category={category} bannerImage={bannerImage} />
             <CategorySubcategories category={category} subcategories={category.subcategories} products={products.edges} />
-            <CategoryProducts products={products.edges.filter(item=>item.node.product_collection==='BESTSELLERS').slice(0,4)}/>
+            <CategoryProducts products={products.edges.filter(item=>item.node.product_bestseller).slice(0,4)}/>
         </div>
     );
 };
